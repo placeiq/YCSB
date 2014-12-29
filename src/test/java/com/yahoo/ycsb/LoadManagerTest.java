@@ -8,7 +8,7 @@ import org.apache.zookeeper.WatchedEvent;
 import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.ZooDefs;
 import org.apache.zookeeper.ZooKeeper;
-import org.apache.zookeeper.server.NIOServerCnxn;
+import org.apache.zookeeper.server.NIOServerCnxnFactory;
 import org.apache.zookeeper.server.SyncRequestProcessor;
 import org.apache.zookeeper.server.ZooKeeperServer;
 import org.junit.AfterClass;
@@ -40,7 +40,8 @@ public class LoadManagerTest {
 
     zs = new ZooKeeperServer(tmpdir, tmpdir, 1000);
     SyncRequestProcessor.setSnapCount(150);
-    NIOServerCnxn.Factory f = new NIOServerCnxn.Factory(new InetSocketAddress(zkPort));
+    NIOServerCnxnFactory f = new NIOServerCnxnFactory();
+    f.configure(new InetSocketAddress(zkPort), 100);
     f.startup(zs);
     log.info("starting up the zookeeper server .. waiting");
     Assert.assertTrue("waiting for server being up", waitForServerUp(zkPort, 2000));

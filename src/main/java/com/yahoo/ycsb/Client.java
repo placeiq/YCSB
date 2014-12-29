@@ -180,7 +180,6 @@ public class Client {
         e.printStackTrace();
         exporter = new TextMeasurementsExporter(out);
       }
-
       exporter.write("OVERALL", "RunTime(ms)", runtime);
       double throughput = 1000.0 * ((double) opcount) / ((double) runtime);
       exporter.write("OVERALL", "Throughput(ops/sec)", throughput);
@@ -190,7 +189,7 @@ public class Client {
       if (exporter != null) {
         exporter.close();
       }
-    }
+   }
   }
 
   @SuppressWarnings("unchecked")
@@ -446,6 +445,8 @@ public class Client {
     for (Future<Integer> result : r) {
       n += result.get();
     }
+    
+    pool.shutdown();
 
     try {
       workload.cleanup();

@@ -145,6 +145,7 @@ public class HBaseClient extends com.yahoo.ycsb.DB {
         this.table = table;
       } catch (IOException e) {
         System.err.println("Error accessing HBase table: " + e);
+        e.printStackTrace();
         return ServerError;
       }
     }
@@ -200,6 +201,7 @@ public class HBaseClient extends com.yahoo.ycsb.DB {
       this.table = table;
     } catch (IOException e) {
       System.err.println("Error accessing HBase table: " + e);
+      e.printStackTrace();
       return ServerError;
     }
   }
@@ -297,6 +299,7 @@ public class HBaseClient extends com.yahoo.ycsb.DB {
         this.table = table;
       } catch (IOException e) {
         System.err.println("Error accessing HBase table: " + e);
+        e.printStackTrace();
         return ServerError;
       }
     }
@@ -349,6 +352,7 @@ public class HBaseClient extends com.yahoo.ycsb.DB {
         this.table = table;
       } catch (IOException e) {
         System.err.println("Error accessing HBase table: " + e);
+        e.printStackTrace();
         return ServerError;
       }
     }
@@ -409,6 +413,7 @@ public class HBaseClient extends com.yahoo.ycsb.DB {
         this.table = table;
       } catch (IOException e) {
         System.err.println("Error accessing HBase table: " + e);
+        e.printStackTrace();
         return ServerError;
       }
     }
@@ -461,6 +466,7 @@ public class HBaseClient extends com.yahoo.ycsb.DB {
     }
 
     System.out.printf("Throughput: %.1f ops/sec for %d operations", ((1000.0) * (((double) (opcount * threadcount)) / ((double) (en - st)))), n);
+    es.shutdown();
   }
 
   private static class LoadGenerator implements Callable<Integer> {
@@ -514,6 +520,9 @@ public class HBaseClient extends com.yahoo.ycsb.DB {
 
       //System.out.println("Average latency: "+(((double)accum)/((double)opcount)));
       //System.out.println("Average get latency: "+(((double)cli.TotalGetTime)/((double)cli.TotalGetOps)));
+
+      System.out.println("Done");
+
       return opCount;
     }
   }
